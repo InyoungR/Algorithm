@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 public class SW_9229 {
+
     static int T, N, M, max, result;
     static int[] bags;
 
