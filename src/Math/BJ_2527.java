@@ -7,7 +7,6 @@ import java.util.StringTokenizer;
 
 public class BJ_2527 {
 
-
     static class Square{
         int x,y,p,q;
         public Square(int x, int y, int p, int q){
