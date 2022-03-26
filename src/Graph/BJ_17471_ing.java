@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
-public class BJ_17471 {
+public class BJ_17471_ing {
     static class Node{
         int pop;
         ArrayList<Integer> near = new ArrayList<Integer>();
