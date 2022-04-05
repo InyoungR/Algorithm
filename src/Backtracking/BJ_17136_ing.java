@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class BJ_17136 {
+public class BJ_17136_ing {
 
     static int [][] map = new int [10][10];
     static int [] papers = {0,5,5,5,5,5};
