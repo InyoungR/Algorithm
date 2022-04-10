@@ -1,8 +1,9 @@
 package DP;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
-public class BJ_1106_ing {
+public class BJ_1106 {
     static class city {
         int cost, effect;
 
@@ -25,23 +26,21 @@ public class BJ_1106_ing {
             cities[i] = new city(sc.nextInt(), sc.nextInt());
         }
 
-        costs = new int [goal+1];
-        DFS(goal);
-        System.out.println(costs[0]);
-    }
-
-    static void DFS(int cnt){
-
-        int min = Integer.MAX_VALUE;
-        for(int i=0; i<n; i++){
-            int temp = cnt-cities[i].effect;
-            if(temp<0) continue;
-            if(costs[temp] != 0){
-                costs[temp] = Math.min(costs[temp], costs[cnt]+cities[i].cost);
-            } else {
-                costs[temp] = costs[cnt]+cities[i].cost;
+        costs = new int [goal+101];
+        Arrays.fill(costs,987654321);
+        costs[0] = 0;
+        for(int i=0; i<goal; i++){
+            for(int j=0; j<n; j++){
+                costs[i+cities[j].effect] = Math.min(costs[i+cities[j].effect], costs[i]+cities[j].cost);
             }
-            DFS(temp);
         }
+        int result = 987654321;
+
+        for(int i=goal; i<goal+101; i++){
+            result = Math.min(result, costs[i]);
+        }
+        System.out.println(result);
+
     }
+
 }
