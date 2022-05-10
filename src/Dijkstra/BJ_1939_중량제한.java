@@ -1,21 +1,32 @@
-package Graph;
+package Dijkstra;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.LinkedList;
+import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
 public class BJ_1939_중량제한 {
-    static class Bridge{
+    static class Bridge implements Comparable<Bridge>{
         int to,limit;
         Bridge next;
+
+        public Bridge(int to, int limit) {
+            this.to = to;
+            this.limit = limit;
+        }
 
         public Bridge(int to, int limit, Bridge next) {
             this.to = to;
             this.limit = limit;
             this.next = next;
+        }
+
+        @Override
+        public int compareTo(Bridge o) {
+            return o.limit - limit;
         }
     }
     public static void main(String[] args) throws IOException {
@@ -41,26 +52,27 @@ public class BJ_1939_중량제한 {
         int factory1 = Integer.parseInt(st.nextToken());
         int factory2 = Integer.parseInt(st.nextToken());
 
-        Queue<int[]> que = new LinkedList<>();
+        PriorityQueue<Bridge> que = new PriorityQueue<>();
         boolean [] V = new boolean[N+1];
-        que.add(new int []{factory1, Integer.MAX_VALUE});
-        int max = 0;
-        while(!que.isEmpty()){
-            int [] cur = que.poll();
-            V[cur[0]] = true;
+        int [] weights = new int [N+1];
+        que.add(new Bridge(factory1, Integer.MAX_VALUE));
 
-            for(Bridge b = bridges[cur[0]]; b != null; b = b.next){
-                if(!V[b.to] && b.limit<= cur[1]){
-                    if(b.to == factory2) {
-                        max = Math.max(max, b.limit);
-                        continue;
-                    }
-                    que.add(new int []{b.to, b.limit});
+        while(!que.isEmpty()){
+            Bridge cur = que.poll();
+
+            if(V[cur.to]) continue;
+            if(cur.to == factory2) break;
+            V[cur.to] = true;
+
+            for(Bridge b = bridges[cur.to]; b != null; b = b.next){
+                if(!V[b.to] && weights[b.to] < Math.min(cur.limit, b.limit) ){
+                    weights[b.to] = Math.min(b.limit, cur.limit);
+                    que.add(new Bridge(b.to, weights[b.to]));
                 }
             }
         }
 
-        System.out.println(max);
+        System.out.println(weights[factory2]);
 
 
     }
