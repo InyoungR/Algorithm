@@ -18,19 +18,20 @@ public class BJ_1654 {
         long max = 0;
         for(int i=0; i<k; i++){
             possess[i] = Integer.parseInt(bf.readLine());
+            if(possess[i]>max) max = possess[i];
         }
 
-        long min = 0;
+        long min = 1;
         max ++;
         long standard = 0;
-        while(min<max){
+        while(min<=max){
             result = 0;
             standard = (max+min)/2;
             for(int i=0; i<k; i++){
                 result += possess[i]/standard;
             }
             if(result<n){
-                max = standard;
+                max = standard-1;
             } else {
                 min=standard+1;
             }

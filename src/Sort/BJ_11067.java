@@ -1,4 +1,4 @@
-package Alignment;
+package Sort;
 
 import java.util.*;
 
