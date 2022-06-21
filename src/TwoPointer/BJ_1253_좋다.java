@@ -31,7 +31,7 @@ public class BJ_1253_좋다 {
         for(int i=0; i<n; i++){
             for(int j=i+1; j<n; j++){
                 int num = nums2[i] + nums2[j];
-                if(nums.containsKey(num)){
+                if(nums.containsKey(num)){ // 0 3
                     if((num== nums2[i] || num == nums2[j]) && nums.get(num)==1)continue;
                     if(nums2[i] == nums2[j] && num == nums2[j] && nums.get(num)==2) continue;
                     answer += nums.get(num);
