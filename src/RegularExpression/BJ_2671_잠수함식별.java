@@ -9,10 +9,12 @@ public class BJ_2671_잠수함식별 {
     public static void main(String[] args) throws IOException {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         String input = bf.readLine();
-        String pattern = "[(100*1*)|(01)]*";
+        String pattern = "((100+1+)|(01))+";
 
         boolean result = Pattern.matches(pattern, input);
 
+        if(result) System.out.println("SUBMARINE");
+        else System.out.println("NOISE");
 
     }
 }
