@@ -3,66 +3,54 @@ package Tree;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.StringTokenizer;
 
 public class BJ_16437_양구출작전 {
-    static class island{
-        boolean isWolf, isLeaf, V;
-        int cnt,next;
 
-        public island() {
-        }
-
-        public island(boolean isWolf, int cnt, int next) {
-            this.isWolf = isWolf;
-            this.cnt = cnt;
-            this.next = next;
-            this.isLeaf = true;
-        }
-    }
+    static List<Integer>[] list;
+    static long[] memo;
     public static void main(String[] args) throws IOException {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st;
         int n = Integer.parseInt(bf.readLine());
-        island[] islands = new island[n+1];
+        list = new List[n+1];
+        memo = new long[n+1];
+        for(int i=1; i<=n; i++){
+            list[i] = new ArrayList<>();
+        }
+
         for(int i=2; i<=n; i++){
             st = new StringTokenizer(bf.readLine());
-            String wolf = st.nextToken();
+            String kind = st.nextToken();
             int cnt = Integer.parseInt(st.nextToken());
-            int next = Integer.parseInt(st.nextToken());
+            int link = Integer.parseInt(st.nextToken());
 
-            if(islands[i] == null) islands[i] = new island(wolf.equals("W"), cnt, next);
-            else {
-                islands[i].isWolf = wolf.equals("W")?true:false;
-                islands[i].cnt = cnt;
-                islands[i].next = next;
+            list[link].add(i);
+            if(kind.equals("W")){
+                cnt *= -1;
             }
-
-            if(islands[next] == null ) islands[next] = new island();
-            islands[next].isLeaf = false;
+            memo[i] = cnt;
         }
 
-        long answer = 0;
-        for(int i=n; i>=2; i--){
-            if(!islands[i].isLeaf) continue;
-            if(islands[i].isWolf) continue;
+        DFS(1,-1);
 
-            int sheep = islands[i].cnt;
-            island island = islands[i];
-            while(sheep>0 && island.next != 1){
-
-                island = islands[island.next];
-                if(island.V) {answer+=sheep; break;}
-                if(island.isWolf) sheep -= island.cnt;
-                else sheep += island.cnt;
-
-                island.V = true;
-            }
-
-            if(island.next == 1) answer += sheep;
-        }
-
-        System.out.println(answer);
+        System.out.println(memo[1]);
 
     }
+
+    static void DFS(int idx, int pa) {
+
+        for(int nxt: list[idx]){
+            DFS(nxt, idx);
+        }
+
+        if(pa != -1){
+            if(memo[idx]>0){
+                memo[pa] += memo[idx];
+            }
+        }
+    }
+
 }
