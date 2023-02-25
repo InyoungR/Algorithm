@@ -38,6 +38,12 @@ public class SWEA_1865_동철이의일분배 {
     }
 
     static void DFS(int cnt, double num, int v){
+
+
+
+
+
+
         if(num<=result) return;
         if(cnt == n){
             result = Math.max(result, num);
