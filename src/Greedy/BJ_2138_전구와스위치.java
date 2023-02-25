@@ -56,7 +56,7 @@ public class BJ_2138_전구와스위치 {
         LightBulb light = new LightBulb(n, input);
         LightBulb lightLater = new LightBulb(n, input2);
         int answer = 0;
-        int result = -987654321;
+        int result = 987654321;
 
         //첫 번째 누른 경우
         light.turnSwitch(0);
@@ -70,7 +70,7 @@ public class BJ_2138_전구와스위치 {
 
         if(light.equals(lightLater)) result = Math.min(result, answer);
 
-        if(result == -987654321) System.out.println(-1);
+        if(result == 987654321) System.out.println(-1);
         else System.out.println(result);
 
 
