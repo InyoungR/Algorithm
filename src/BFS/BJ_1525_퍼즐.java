@@ -22,9 +22,9 @@ public class BJ_1525_퍼즐 {
                 int a = Integer.parseInt(st.nextToken());
                 if(a == 0) {
                     a= 9;
-                    start[1] = 9-(3*i+j+1);
+                    start[1] = 9-(3*i+j+1);//8
                 }
-                start[0] = start[0]*10 + a;
+                start[0] = start[0]*10 + a;//687524391
             }
         }
 
